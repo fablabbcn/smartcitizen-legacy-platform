@@ -31,15 +31,15 @@ Users data are stored on our server and connected to cosm, facebook and twitter 
 
 In order to speed up the development and reduce the web platform cost, we made a large use of public library and third party API. In counterpart the platform have a great dependency to their limit (no full control over data), availability (up-time, only for API), stability (difficult debuging) and evolution (release of new version retro-compatible).
 
-Free open source API services :
+Open source API services :
 - Cosm for arduino connection and storing sensors datas. (+ networking ?)
-- MapBox as a customised map provider (payant solution)
 - Gisgraphy for geocoding (not used yet)
 - CartoDB for other geo-localized data storage (not used yet)
 - WorldWideLexicon for text translation (not used yet)
 
-Free Non open-source API services (used for their popularity, not found in open-source project)
+Proprietary API services (used for their popularity, not found in open-source project)
 - Facebook and twitter for social networking
+- MapBox as a customised map provider (payant solution)
 
 Javascript library :
 - Leaflet for the map rendering and interaction.(similar to google maps but open-source and mobile compliant)

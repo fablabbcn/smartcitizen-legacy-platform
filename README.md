@@ -56,4 +56,4 @@ html 5 / CSS5
 
 ## Contact 
 
-alex@fablabbcn.org
+alex [at] fablabbcn.org

@@ -31,26 +31,26 @@ Users data are stored on our server and connected to cosm, facebook and twitter 
 
 In order to speed up the development and reduce the web platform cost, we made a large use of public library and third party API. In counterpart the platform have a great dependency to their limit (no full control over data), availability (up-time, only for API), stability (difficult debuging) and evolution (release of new version retro-compatible).
 
-Open source API services :
+API services (Proprietary)
 - Cosm for arduino connection and storing sensors datas. (+ networking ?)
+- Facebook and twitter for social networking
+- MapBox as a customised map provider (payant solution only ?)
+
+API services (Open Source):
 - Gisgraphy for geocoding (not used yet)
 - CartoDB for other geo-localized data storage (not used yet)
 - WorldWideLexicon for text translation (not used yet)
 
-Proprietary API services 
-- Facebook and twitter for social networking
-- MapBox as a customised map provider (payant solution)
-
-Javascript library :
+Javascript library (Open Source):
 - Leaflet for the map rendering and interaction.(similar to google maps but open-source and mobile compliant)
 - jQuery a javascript framework for reducing code developpment (“write less, do more” slogan) + support for cross-browser.
 - Raphael and gRaphael for vector drawings over leaflet's map and for enhanced charting.
 
-Php library / framwork
+Php library / framwork (Open Source)
 - CakePhp for the MVC framework
 - Piwik for visitors analytics (similar to google analytics but open-source)
 
-html 5 / CSS5
+html 5 / CSS5 (Open Source)
 - HTML5 Boilerplate + modernizer for Enabling html5/css3 on older browser while being respecfull of W3C standards.
 
 

@@ -1,0 +1,204 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: baseline;
+}
+/* remember to define focus styles! */
+:focus {
+  outline: 0;
+}
+body {
+  padding: 10px;
+  line-height: 1;
+  color: black;
+  background: white;
+}
+ol, ul {
+  list-style: none;
+}
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+}
+blockquote, q {
+  quotes: "" "";
+}
+
+@font-face{
+  font-family: HattoriHanzoLight;
+  src: url('fonts/hattori/hattori_hanzo-webfont.eot');
+  src: url('fonts/hattori/hattori_hanzo-webfont.eot?iefix') format('eot'), url('fonts/hattori/hattori_hanzo-webfont.woff') format('woff'), url('fonts/hattori/hattori_hanzo-webfont.ttf') format('truetype'), url('fonts/hattori/hattori_hanzo-webfont.svg#webfont2bbtnxOL') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+body{
+  color:#555;
+  font-size: 12px;
+  font-family: Arial, Helvetica, Sans-serif;
+}
+
+
+#droparea{
+	display: block;
+	border: 4px dashed #DDD;
+	height: 200px;
+	text-align: center;
+}
+#droparea.dropping{
+  border-color: #83b4d8;
+}
+#droparea p{ 
+	color: #AAA;
+	font-size: 20px;
+	padding: 60px 0 0 0!important;
+	font-weight: bold;
+}
+#browse{
+	border-color: #BBB;
+	text-decoration: none;
+	color: #464646!important;
+	border:solid 1px #DFDFDF;
+	background-color: white;
+	display: inline-block;
+	-webkit-border-radius:15px;
+	-moz-border-radius:15px;
+	border-radius:15px;
+	font-size: 12px!important;
+	line-height: 13px;
+	padding: 3px 8px;
+	cursor: pointer;
+	margin-top: 4px;
+}
+#browse:hover{
+	border-color: #BBB;
+	text-decoration: none!important;
+}
+
+/* ---------------------------------------------------- */
+/*    LISTES DES FICHIERS
+/* ---------------------------------------------------- */
+#filelist{
+	margin-top: 10px;
+	position: relative;
+}
+#filelist img{ 
+  margin-top: 5px; margin-right: 10px;
+  height: 50px;
+  vertical-align: middle;
+}
+#filelist>form>div{
+	border:solid 1px #dfdfdf;
+	height: 70px;
+	line-height: 60px;
+	padding: 0 10px;
+  margin-top: 5px;
+  position: relative;
+}
+#filelist .actions{
+  position: absolute;
+  top:5px;
+  right:5px;
+}
+#filelist .del{
+  color:#FF0000;
+}
+#filelist .progressbar {
+  top:25px;
+  right:5px;
+  width:250px;
+  position: absolute;
+  height: 20px;
+  padding-right: 2px;
+  background-color: #abb2bc;
+  -moz-border-radius: 25px;
+  -webkit-border-radius: 25px;
+  -o-border-radius: 25px;
+  -ms-border-radius: 25px;
+  -khtml-border-radius: 25px;
+  border-radius: 25px;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #949daa), color-stop(100%, #abb2bc));
+  background: -webkit-linear-gradient(#949daa 0%, #abb2bc 100%);
+  background: -moz-linear-gradient(#949daa 0%, #abb2bc 100%);
+  background: -o-linear-gradient(#949daa 0%, #abb2bc 100%);
+  background: -ms-linear-gradient(#949daa 0%, #abb2bc 100%);
+  background: linear-gradient(#949daa 0%, #abb2bc 100%);
+  -moz-box-shadow: inset 0px 1px 2px 0px rgba(0, 0, 0, 0.5), 0px 1px 0px 0px white;
+  -webkit-box-shadow: inset 0px 1px 2px 0px rgba(0, 0, 0, 0.5), 0px 1px 0px 0px white;
+  -o-box-shadow: inset 0px 1px 2px 0px rgba(0, 0, 0, 0.5), 0px 1px 0px 0px white;
+  box-shadow: inset 0px 1px 2px 0px rgba(0, 0, 0, 0.5), 0px 1px 0px 0px white;
+}
+#filelist .progressbar.transition .progress {
+  -moz-transition: background-color 0.5s ease-in, border-color 1.5s ease-out, box-shadow 1.5s ease-out;
+  -webkit-transition: background-color 0.5s ease-in, border-color 1.5s ease-out, box-shadow 1.5s ease-out;
+  -o-transition: background-color 0.5s ease-in, border-color 1.5s ease-out, box-shadow 1.5s ease-out;
+  transition: background-color 0.5s ease-in, border-color 1.5s ease-out, box-shadow 1.5s ease-out;
+}
+#filelist .progressbar .progress {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  height: 18px;
+  -moz-border-radius: 25px;
+  -webkit-border-radius: 25px;
+  -o-border-radius: 25px;
+  -ms-border-radius: 25px;
+  -khtml-border-radius: 25px;
+  border-radius: 25px;
+  -webkit-background-size: 44px 44px;
+  -moz-background-size: 36px 36px;
+  background-color: #74d04c;
+  background: -webkit-gradient(linear, 0 0, 44 44, color-stop(0, rgba(255, 255, 255, 0.17)), color-stop(0.25, rgba(255, 255, 255, 0.17)), color-stop(0.26, rgba(255, 255, 255, 0)), color-stop(0.5, rgba(255, 255, 255, 0)), color-stop(0.51, rgba(255, 255, 255, 0.17)), color-stop(0.75, rgba(255, 255, 255, 0.17)), color-stop(0.76, rgba(255, 255, 255, 0)), color-stop(1, rgba(255, 255, 255, 0))), -webkit-gradient(linear, left bottom, left top, color-stop(0, rgba(255, 255, 255, 0)), color-stop(1, rgba(255, 255, 255, 0.35))), #74d04c;
+  background: -moz-repeating-linear-gradient(top left -30deg, rgba(255, 255, 255, 0.17), rgba(255, 255, 255, 0.17) 15px, rgba(255, 255, 255, 0) 15px, rgba(255, 255, 255, 0) 30px), -moz-linear-gradient(rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0) 100%), #74d04c;
+  -moz-box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.4), inset 0px -1px 1px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.4), inset 0px -1px 1px rgba(0, 0, 0, 0.2);
+  -o-box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.4), inset 0px -1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.4), inset 0px -1px 1px rgba(0, 0, 0, 0.2);
+  border: 1px solid #4c8932;
+  -moz-animation: animate-stripes 2s linear infinite;
+  -webkit-animation: animate-stripes 2s linear infinite;
+  -o-animation: animate-stripes 2s linear infinite;
+  -ms-animation: animate-stripes 2s linear infinite;
+  -khtml-animation: animate-stripes 2s linear infinite;
+  animation: animate-stripes 2s linear infinite;
+}
+#filelist .progressbar .progress span.ui-label {
+  -moz-font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
+  -o-font-smoothing: antialiased;
+  -ms-font-smoothing: antialiased;
+  -khtml-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  font-size: 13px;
+  position: absolute;
+  right: 0;
+  line-height: 23px;
+  padding-right: 12px;
+  color: rgba(0, 0, 0, 0.6);
+  text-shadow: rgba(255, 255, 255, 0.45) 0 1px 0px;
+  white-space: nowrap;
+}
+#filelist .progressbar .progress span.ui-label b {
+  font-weight: bold;
+}

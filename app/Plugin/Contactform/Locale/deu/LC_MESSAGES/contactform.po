@@ -1,0 +1,60 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ContactForm for CakePHP 2.x\n"
+"POT-Creation-Date: 2012-06-15 19:21+0200\n"
+"PO-Revision-Date: 2012-06-15 19:28+0100\n"
+"Last-Translator: Patrick Hafner <mail@patrickhafner.de>\n"
+"Language-Team: Patrick Hafner <dev@patrickhafner.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: /Controller/ContactController.php:27
+msgid "contact form request"
+msgstr "Kontaktformular"
+
+#: /Controller/ContactController.php:29
+msgid "name"
+msgstr "Name"
+
+#: /Controller/ContactController.php:30
+msgid "email"
+msgstr "E-Mail"
+
+#: /Controller/ContactController.php:31
+msgid "message"
+msgstr "Nachricht"
+
+#: /Controller/ContactController.php:34
+msgid "sent from"
+msgstr "gesendet von"
+
+#: /Controller/ContactController.php:37
+msgid "contact form was submitted successfully"
+msgstr "Kontaktformular wurde gesendet"
+
+#: /Controller/ContactController.php:45
+msgid "contact form"
+msgstr "Kontaktformular"
+
+#: /Model/Contactform.php:27
+msgid "please insert your name"
+msgstr "Bitte Namen eingeben"
+
+#: /Model/Contactform.php:38
+msgid "please insert your email address"
+msgstr "Bitte eine gültige E-Mail Adresse eingeben"
+
+#: /Model/Contactform.php:49
+msgid "please enter your message"
+msgstr "Bitte Nachricht eingeben"
+
+msgid "submit"
+msgstr "Absenden"
+

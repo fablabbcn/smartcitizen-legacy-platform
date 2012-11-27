@@ -1,0 +1,53 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2012-06-15 19:21+0200\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: /Controller/ContactController.php:27
+msgid "contact form request"
+msgstr ""
+
+#: /Controller/ContactController.php:29
+msgid "name"
+msgstr ""
+
+#: /Controller/ContactController.php:30
+msgid "email"
+msgstr ""
+
+#: /Controller/ContactController.php:31
+msgid "message"
+msgstr ""
+
+#: /Controller/ContactController.php:34
+msgid "sent from"
+msgstr ""
+
+#: /Controller/ContactController.php:37
+msgid "contact form was submitted successfully"
+msgstr ""
+
+#: /Controller/ContactController.php:45
+msgid "contact form"
+msgstr ""
+
+#: /Model/Contactform.php:27
+msgid "please insert your name"
+msgstr ""
+
+#: /Model/Contactform.php:38
+msgid "please insert your email address"
+msgstr ""
+
+#: /Model/Contactform.php:49
+msgid "please enter your message"
+msgstr ""
+
+msgid "submit"
+msgstr ""

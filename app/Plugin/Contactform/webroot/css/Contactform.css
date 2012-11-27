@@ -1,0 +1,64 @@
+label {
+    display: block;
+    font-size: 12px;
+    margin: 10px 0 5px 0;
+}
+
+form .required label::after {
+    color: black;
+    content: ' *';
+    display: inline;
+}
+
+input, textarea {
+    padding: 9px;
+    border: solid 1px #E5E5E5;
+    outline: none;
+    width: 100%;
+    background: #FFFFFF;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
+}
+
+form {
+    margin-top: 20px;
+}
+
+input:focus, textarea:focus {
+    border: 1px solid #999;
+}
+
+.error input, .error textarea {
+    border: 1px solid red;
+}
+
+div.error-message {
+    font-size: 10px;
+    margin-bottom: 15px;
+    background: #fff url(../img/validation_error.png) left no-repeat;
+    padding-left: 18px;
+}
+
+form .required label::after {
+    color: black;
+    content: ' *';
+    display: inline;
+}
+
+input:focus, textarea:focus {
+    border: 1px solid #999;
+}
+
+.error input, div#main div#content div.blog-post div#blog-post-comment-area .error textarea {
+    border: 1px solid red;
+}
+
+div.error-message {
+    font-size: 10px;
+    margin-bottom: 15px;
+    background: #fff url(../img/validation_error.png) left no-repeat;
+    padding-left: 18px;
+}

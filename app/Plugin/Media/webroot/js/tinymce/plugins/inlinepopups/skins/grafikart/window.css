@@ -1,0 +1,85 @@
+/* Clearlooks 2 */
+
+/* Reset */
+.grafikart, .grafikart div, .grafikart span, .grafikart a {vertical-align:baseline; text-align:left; position:absolute; border:0; padding:0; margin:0; background:transparent; font-family: 'Lucida Grande', Verdana, Arial, sans-serif; font-size:11px; color:#000; text-decoration:none; font-weight:normal; width:auto; height:auto; overflow:hidden; display:block}
+
+
+
+/* General */
+.grafikart {
+	position: absolute;
+	direction: ltr;
+	border: 1px solid #555;
+
+	-webkit-box-shadow: rgba(0,0,0,1) 0 4px 30px;
+	-moz-box-shadow: rgba(0,0,0,1) 0 4px 30px;
+	box-shadow: rgba(0,0,0,1) 0 4px 30px;
+}
+.grafikart .mceWrapper {position:static}
+.mceEventBlocker {position:fixed; left:0; top:0; background:url(img/horizontal.gif) no-repeat 0 -75px; width:100%; height:100%}
+.grafikart .mcePlaceHolder {border:1px solid #000; background:#888; top:0; left:0; opacity:0.5; -ms-filter:'alpha(opacity=50)'; filter:alpha(opacity=50)}
+.grafikart_modalBlocker {position:fixed; left:0; top:0; width:100%; height:100%; background:#000; opacity:0.75; -ms-filter:'alpha(opacity=75)'; filter:alpha(opacity=75); display:none}
+
+/* Top */
+.grafikart .mceTop, .grafikart .mceTop div {top:0; width:100%; height:27px; }
+.grafikart .mceTop{ background:#222; color:#CFCFCF; }
+.grafikart .mceTop span {width:100%; text-align:left; padding-left:10px; vertical-align:middle; line-height:27px; font-weight:normal;  color:#CFCFCF;}
+
+/* Middle */
+.grafikart .mceMiddle, .grafikart .mceMiddle div {top:0}
+.grafikart .mceMiddle {width:100%; height:100%; clip:rect(23px auto auto auto)}
+.grafikart .mceMiddle .mceLeft {left:0; width:5px; height:100%; background:url(img/vertical.gif) -5px 0}
+.grafikart .mceMiddle span {top:23px; left:5px; width:100%; height:100%; background:#FFF}
+.grafikart .mceMiddle .mceRight {right:0; width:5px; height:100%; background:url(img/vertical.gif)}
+
+/* Bottom */
+.grafikart .mceBottom, .grafikart .mceBottom div {height:6px}
+.grafikart .mceBottom {left:0; bottom:0; width:100%}
+.grafikart .mceBottom div {top:0}
+.grafikart .mceBottom .mceLeft {left:0; width:5px; background:url(img/corners.gif) -34px -6px}
+.grafikart .mceBottom .mceCenter {left:5px; width:100%; background:url(img/horizontal.gif) 0 -46px}
+.grafikart .mceBottom .mceRight {right:0; width:5px; background: url(img/corners.gif) -34px 0}
+.grafikart .mceBottom span {display:none}
+.grafikart .mceStatusbar .mceBottom, .grafikart .mceStatusbar .mceBottom div {height:23px}
+.grafikart .mceStatusbar .mceBottom .mceLeft {background:url(img/corners.gif) -29px 0}
+.grafikart .mceStatusbar .mceBottom .mceCenter {background:url(img/horizontal.gif) 0 -52px}
+.grafikart .mceStatusbar .mceBottom .mceRight {background:url(img/corners.gif) -24px 0}
+.grafikart .mceStatusbar .mceBottom span {display:block; left:7px; font-family:Arial, Verdana; font-size:11px; line-height:23px}
+
+/* Actions */
+.grafikart a {width:15px; height:15px; top:3px;}
+.grafikart .mceClose {right:6px; background:url(img/close.png); }
+.grafikart .mceMin {display:none; right:68px; background:url(img/buttons.gif) 0 0}
+.grafikart .mceMed {display:none; right:37px; background:url(img/buttons.gif) -29px 0}
+.grafikart .mceMax {display:none; right:37px; background:url(img/buttons.gif) -58px 0}
+.grafikart .mceMove {display:none;width:100%;cursor:move;background:url(img/corners.gif) no-repeat -100px -100px}
+.grafikart .mceMovable .mceMove {display:block}
+
+/* Resize */
+.grafikart .mceResize {top:auto; left:auto; display:none; width:5px; height:5px; background:url(img/horizontal.gif) no-repeat 0 -75px}
+.grafikart .mceResizable .mceResize {display:block}
+.grafikart .mceResizable .mceMin, .grafikart .mceMax {display:none}
+.grafikart .mceMinimizable .mceMin {display:block}
+.grafikart .mceMaximizable .mceMax {display:block}
+.grafikart .mceMaximized .mceMed {display:block}
+.grafikart .mceMaximized .mceMax {display:none}
+.grafikart a.mceResizeN {top:0; left:0; width:100%; cursor:n-resize}
+.grafikart a.mceResizeNW {top:0; left:0; cursor:nw-resize}
+.grafikart a.mceResizeNE {top:0; right:0; cursor:ne-resize}
+.grafikart a.mceResizeW {top:0; left:0; height:100%; cursor:w-resize;}
+.grafikart a.mceResizeE {top:0; right:0; height:100%; cursor:e-resize}
+.grafikart a.mceResizeS {bottom:0; left:0; width:100%; cursor:s-resize}
+.grafikart a.mceResizeSW {bottom:0; left:0; cursor:sw-resize}
+.grafikart a.mceResizeSE {bottom:0; right:0; cursor:se-resize}
+
+/* Alert/Confirm */
+.grafikart .mceButton {font-weight:bold; bottom:10px; width:80px; height:30px; background:url(img/button.gif); line-height:30px; vertical-align:middle; text-align:center; outline:0}
+.grafikart .mceMiddle .mceIcon {left:15px; top:35px; width:32px; height:32px}
+.grafikart .mceAlert .mceMiddle span, .grafikart .mceConfirm .mceMiddle span {background:transparent;left:60px; top:35px; width:320px; height:50px; font-weight:bold; overflow:auto; white-space:normal}
+.grafikart a:hover {font-weight:bold;}
+.grafikart .mceAlert .mceMiddle, .grafikart .mceConfirm .mceMiddle {background:#D6D7D5}
+.grafikart .mceAlert .mceOk {left:50%; top:auto; margin-left: -40px}
+.grafikart .mceAlert .mceIcon {background:url(img/alert.gif)}
+.grafikart .mceConfirm .mceOk {left:50%; top:auto; margin-left: -90px}
+.grafikart .mceConfirm .mceCancel {left:50%; top:auto}
+.grafikart .mceConfirm .mceIcon {background:url(img/confirm.gif)}

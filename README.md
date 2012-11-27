@@ -54,3 +54,6 @@ html 5 / CSS5
 - HTML5 Boilerplate + modernizer for Enabling html5/css3 on older browser while being respecfull of W3C standards.
 
 
+## Contact 
+
+alex@fablabbcn.org

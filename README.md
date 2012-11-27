@@ -37,7 +37,7 @@ Open source API services :
 - CartoDB for other geo-localized data storage (not used yet)
 - WorldWideLexicon for text translation (not used yet)
 
-Proprietary API services (used for their popularity, not found in open-source project)
+Proprietary API services 
 - Facebook and twitter for social networking
 - MapBox as a customised map provider (payant solution)
 

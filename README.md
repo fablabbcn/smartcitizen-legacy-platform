@@ -1,4 +1,4 @@
-smartcitizen.me update
+smartcitizen.me
 ===============
 [![SmartCitizen](http://beta.smartcitizen.me/img/logo_200x200.png)](http://beta.smartcitizen.me)
 

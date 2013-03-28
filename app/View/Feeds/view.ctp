@@ -5,14 +5,28 @@
 
 <section style='width:550px'>
 	<header>
+<?php if (isset($actions)){ ?>
 		<div class='action'>
-		    <?php echo $this->Form->postLink(
-                'X '.__('Delete'),
-                array('action' => 'delete', $data['Feed']['id']),
-                array('confirm' => __('Are you sure?'), 'class'=>'button'));
-            ?>
-            <?php echo $this->Html->link('> '.__('Edit'), array('action' => 'edit', $data['Feed']['id']), array('class'=>'button')); ?>
+			<?php 
+
+				if (in_array("configure", $actions)){
+					echo $this->Html->link('> '.__('Configure'), array('action' => 'configure', $data['Feed']['id']), array('class'=>'button')); 
+				}
+				echo " ";
+				if (in_array("edit", $actions)){
+					echo $this->Html->link('> '.__('Edit'), array('action' => 'edit', $data['Feed']['id']), array('class'=>'button')); 
+				}
+				echo " ";
+				if (in_array("delete", $actions)){
+					echo $this->Form->postLink(
+						'X '.__('Delete'),
+						array('action' => 'delete', $data['Feed']['id']),
+						array('confirm' => __('Are you sure?'), 'class'=>'button'));
+					
+				}
+			?>
 		</div>
+<?php } ?>
 		<h1>Sensor <?php echo $data['Feed']['title']; ?></h1>
 
 	</header>

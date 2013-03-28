@@ -10,7 +10,6 @@
 	$response['script']= $this->fetch('script');
 	$response['inlinescript']= $this->fetch('inline-script');
 	
-//!! Miss a php script to extract content of <script> balise from "content" and "aside"
 
 	$response['flash']=$this->Session->flash();
 

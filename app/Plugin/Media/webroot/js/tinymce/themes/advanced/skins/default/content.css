@@ -47,3 +47,100 @@ font[face=mceinline] {font-family:inherit !important}
 .mceItemAudio {background-image:url(../../img/video.gif)}
 .mceItemIframe {background-image:url(../../img/iframe.gif)}
 .mcePageBreak {display:block;border:0;width:100%;height:12px;border-top:1px dotted #ccc;margin-top:15px;background:#fff url(../../img/pagebreak.gif) no-repeat center top;}
+
+
+/*---- CUSTOM STYLE------*/
+
+* {
+	padding:0;
+	margin:0;
+}
+
+html, body {
+	height: 100%;
+	overflow:hidden;
+	background:#000; 
+}
+
+@font-face {
+    font-family: 'UbuntuTitlingBold';
+    src: url('font/UbuntuTitling-Bold-webfont.eot');
+    src: url('font/UbuntuTitling-Bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('font/UbuntuTitling-Bold-webfont.woff') format('woff'),
+         url('font/UbuntuTitling-Bold-webfont.ttf') format('truetype'),
+         url('font/UbuntuTitling-Bold-webfont.svg#UbuntuTitlingBold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+	font-size: .8em;
+	color:#eee;
+}
+
+h1, h2, h3, nav a{
+	font-family: UbuntuTitlingBold;
+}
+
+
+h1 {
+	font-size: 1.6em;
+	color: #fff;
+	line-height:1em;
+	margin-right:10px;
+}
+
+h2 {
+	font-size: 1.25em;
+	color: #fff;
+	line-height:1em;
+	margin-right:10px;
+}
+
+h3 {
+	font-size: 1.25em;
+/*	color: inherit; */
+	line-height:1em;
+	margin-right:10px;
+}
+h3 {
+	font-size: 1.25em;
+/*	color: inherit; */
+	line-height:1em;
+	margin-right:10px;
+}
+
+h4 {
+	font-size: 1em;
+	color: #08d6fe;
+	line-height:1em;
+	margin-right:10px;
+}
+
+
+p {
+	margin: 10px 0;
+	text-align:justify;
+}
+
+b, strong {
+	font-weight: bold;
+}
+
+i {
+	font-style: italic;
+}
+img{
+	border:0;
+}
+
+
+a, a:visited, a:active, a:link{
+	color:#fff;
+	text-decoration:none;
+}
+
+a:hover{
+	color:#069dbc;
+}

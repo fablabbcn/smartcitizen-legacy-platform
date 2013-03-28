@@ -23,7 +23,7 @@ class AppController extends Controller {
 		'RequestHandler',
 		'Session',
 		'Auth' => array(
-			'loginRedirect' => array('controller' => 'users', 'action' => 'me'),
+			'loginRedirect' => array('controller' => 'users', 'action' => 'dashboard'),
 			'logoutRedirect' => array('controller' => 'pages', 'action' => 'display', 'home'),
 			'authorize' => array('Controller') // Added this line
 		),
@@ -38,13 +38,14 @@ class AppController extends Controller {
 		}
 		
 		// Default deny
-//		$this->Auth->authError = "This error shows up with the user tries to access a part of the website that is protected."
+		//$this->Auth->authError = "This error shows up with the user tries to access a part of the website that is protected.";
 		if(isset($user['role']))
 			$this->Session->setFlash('You are not allowed to acces this page.');
 		else
 			$this->Session->setFlash('You need to be authentified to participate. please login');
 		return false;
 	}
+	
     public function beforeFilter() {
         $this->Auth->allow('index', 'view', 'display');
 		 if($this->RequestHandler->isAjax()){
@@ -57,8 +58,13 @@ class AppController extends Controller {
     }
 	
 	public function beforeRender() {
-	 //  $this->set('currentUser', $this->Auth->user('id'));			
-			$this->set('authUser',$this->Auth->user());
+	 //  $this->set('currentUser', $this->Auth->user('id'));
+			$authUser=array(
+				'id'=>$this->Auth->user('id'),
+				'username'=>$this->Auth->user('username'),
+				'role'=>$this->Auth->user('role')
+			);
+			$this->set('authUser',$authUser);
 	}
 	
 	

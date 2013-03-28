@@ -4,10 +4,14 @@
 
 class FeedsController extends AppController {
 	public $helpers = array('Html', 'Form', 'Session','Text');
-	
+	public $components = array(
+		'Apis.Oauth' => array(
+			'cosm'
+		)
+	);
 	// Everybody can see feed
 	public function beforeFilter() {
-        $this->Auth->allow('index', 'view', 'test');
+        $this->Auth->allow('index', 'view', 'test','configure');
     }
 	public function isAuthorized($user) {
 		// All registered users can add a feed
@@ -16,7 +20,7 @@ class FeedsController extends AppController {
 		}
 
 		// The owner can edit and delete the feeds he own
-		if (in_array($this->action, array('edit', 'delete'))) {
+		if (in_array($this->action, array('edit', 'configure', 'delete'))) {
 			$feedId = $this->request->params['pass'][0];
 			if ($this->Feed->isOwnedBy($feedId, $user['id'])) {
 				return true;
@@ -31,7 +35,16 @@ class FeedsController extends AppController {
     }
 	
 	public function view($id = null) {
-        $this->set('data', $this->Feed->read(null,$id));
+		$this->Feed->id = $id;
+/*        if (!$this->Feed->exists()) {
+            throw new NotFoundException(__('Invalid sensor'));
+        }
+*/
+		$data=$this->Feed->read(null, $id);
+        $this->set('data', $data);
+		if ($this->Auth->loggedIn() AND ($this->Auth->user('id') === $data['User']['id'] OR $this->Auth->user('role') === 'admin')) {
+			$this->set('actions',array('edit','configure','delete'));
+		}
     }
 	
 /* An alternative will be to use the php library from pachubeAPI :	
@@ -46,13 +59,20 @@ class FeedsController extends AppController {
         if ($this->request->is('post')) {
 			//add user id (for ownership)
 			$this->request->data['Feed']['user_id'] = $this->Auth->user('id');
-            $this->Feed->create();
-//			debug($this->Feed);
+			$this->loadModel('User');
+			$this->User->id = $this->Auth->user('id');
+			$data = $this->User->read(null,$this->Auth->user('id'));
+			$this->request->data['Feed']['cosm_token'] = $data['User']['cosm_token'];
+//            debug($this->request->data['Feed']['cosm_token']);
+			$this->Feed->create();
             if ($this->Feed->save($this->request->data)) {
+				debug($this->Feed->Cosm->id);
                 $this->Session->setFlash('Your feed has been created.');
-                $this->redirect(array('action' => 'view',$this->id));
+                $this->redirect(array('action' => 'view',$this->Feed->Cosm->id));
             } else {
                 $this->Session->setFlash('Unable to add your feed.');
+				$this->Oauth->useDbConfig = 'cosm';
+				$this->Oauth->connect();
             }
         }
     }
@@ -69,6 +89,18 @@ class FeedsController extends AppController {
 				$this->Session->setFlash('Unable to update your feed.');
 			}
 		}
+	}
+	
+	public function configure($id = null) {
+		$this->Feed->id = $id;
+		$data=$this->Feed->read(null, $id);
+        $this->set('data', $data);
+	}
+	
+	public function configureauto($id = null) {
+		$this->Feed->id = $id;
+		$data=$this->Feed->read(null, $id);
+        $this->set('data', $data);
 	}
 	
 	public function delete($id) {

@@ -1,8 +1,10 @@
 <?php
+// app/Controller/PostsController.php
 class PostsController extends AppController {
+
     public $helpers = array('Html', 'Form', 'Session','Text');
 //    public $components = array('Session');
-public $components = array('RequestHandler');
+	public $components = array('RequestHandler');
 			
 	public function isAuthorized($user) {
 		// All registered users can add posts

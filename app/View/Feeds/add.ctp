@@ -1,5 +1,5 @@
 <!-- File: /app/View/Feeds/add.ctp -->
-<section style='width:300px'>
+<section style='width:330px'>
 	<header>
 		<h1>Register a new Kit</h1>
 	</header>
@@ -10,13 +10,22 @@
 		echo $this->Form->create('Feed');
 		echo $this->Form->input('title');
 		echo $this->Form->input('description', array('rows' => '3'));
+		echo $this->Form->input('location');
+		echo $this->Form->input('elevation');
 ?>
 <br/>
 <legend>(<b>tip</b> : Click on the map to fill this 2 fields.)</legend>
 <?php
 		echo $this->Form->input('longitude');
 		echo $this->Form->input('latitude');
-		echo $this->Form->end('Save Feed');
+?>
+<hr/>
+<legend>These informations are for the configuration of the kit, and will not be displaed publicly</legend>
+<?php
+		echo $this->Form->input('wifi_ssid');
+		echo $this->Form->input('wifi_pwd');
+		echo $this->Form->input('Kit_number');
+		echo $this->Form->end('Save Sensor');
 ?>
 	</article>
 </section>

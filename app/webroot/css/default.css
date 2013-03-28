@@ -195,7 +195,8 @@ button:hover, input[type="button"]:hover, input[type="submit"]:hover, .button:ho
 
 
 .right {
-	float:right;
+	float:right !important;
+	margin-left:20px;
 }
 
 .left {
@@ -272,7 +273,7 @@ small, .small{
 	top:0px;
 	right:0px;
 /*	width:600px; */
-	width:520px;
+	width:550px;
 	text-align:right;
 	z-index:1;
 }

@@ -184,12 +184,12 @@
 /**
  * A random string used in security hashing methods.
  */
-	Configure::write('Security.salt', 'YourH@sh!');
+	Configure::write('Security.salt', '###');
 
 /**
  * A random numeric string (digits only) used to encrypt/decrypt strings.
  */
-	Configure::write('Security.cipherSeed', '123456');
+	Configure::write('Security.cipherSeed', '####');
 
 /**
  * Apply timestamps with the last modified time to static assets (js, css, images).
@@ -284,7 +284,7 @@ Configure::write('Routing.prefixes', array('admin'));
  * Session time out time (in seconds).
  * Actual value depends on 'Security.level' setting.
  */
-Configure::write('Session.timeout', '720');
+Configure::write('Session.timeout', '36000');
 
 //to stop boring auth disconnect
 

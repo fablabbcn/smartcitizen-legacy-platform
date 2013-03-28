@@ -103,7 +103,7 @@ class Feed extends AppModel {
 		
 		//Store in Cosm
 		if(!$this->Cosm->save($data, $validate, $fieldList)){
-			throw new InternalErrorException(__("The feed couldn't be saved on Cosm Server"),502);
+//			throw new InternalErrorException(__("The feed couldn't be saved on Cosm Server!"),502);
 			return false;	
 		}
 		
@@ -111,7 +111,7 @@ class Feed extends AppModel {
 		if(empty($data['Feed']['id'])){ 
 			//generate an api Key for this feed
 			if(!$this->Cosm->generateKey()){
-				throw new InternalErrorException(__("The feed couldn't be saved on Cosm Server"),502);
+//				throw new InternalErrorException(__("The feed couldn't be saved on Cosm Server"),502);
 				return false;
 			}
 			
@@ -131,7 +131,7 @@ class Feed extends AppModel {
 			return false;
 		$this->Cosm->id=$this->cosm_id;
 		if(!$this->Cosm->generateKey()){
-			throw new InternalErrorException(__("The key couldn't be generated on Cosm Server"),502);
+//			throw new InternalErrorException(__("The key couldn't be generated on Cosm Server"),502);
 			return false;
 		}
 		

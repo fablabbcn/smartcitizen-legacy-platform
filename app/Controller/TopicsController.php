@@ -20,12 +20,12 @@ public $components = array('RequestHandler');
         $this->Topic->id = $id;
         $this->set('data', $this->Topic->read());
 		if ($this->Auth->user('role')){
-			//for eveyone registered
-			$actions[]=('addPost');
-			
+			$actions=array();
 			if ($this->Auth->user('role') === 'admin') {
 				$actions=array('edit','delete');
 			}
+			//for eveyone registered
+			$actions[]=('addPost');
 			$this->set('actions',$actions);
 		}
 	}

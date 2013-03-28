@@ -45,6 +45,7 @@ class EmailConfig {
 	public $default = array(
 		'transport' => 'Mail',
 		'from' => 'server@smartcitizen.me',
+		'sender' => 'server@smartcitizen.me', 'smart citizen website',
 		//'charset' => 'utf-8',
 		//'headerCharset' => 'utf-8',
 	);

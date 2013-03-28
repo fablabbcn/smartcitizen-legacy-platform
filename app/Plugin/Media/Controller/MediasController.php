@@ -66,7 +66,7 @@ class MediasController extends AppController{
     /**
     * Liste les médias
     **/
-    function admin_index($ref,$ref_id){
+    function index($ref,$ref_id){
         $this->loadModel($ref); 
         $d['ref'] = $ref;
         $d['ref_id'] = $ref_id;
@@ -86,7 +86,7 @@ class MediasController extends AppController{
     /**
     * Upload (Ajax)
     **/
-    function admin_upload($ref,$ref_id){
+    function upload($ref,$ref_id){
         $this->Media->save(array(
             'ref'    => $ref,
             'ref_id' => $ref_id,
@@ -105,7 +105,7 @@ class MediasController extends AppController{
     /**
     * Suppression (Ajax)
     **/
-    function admin_delete($id){
+    function delete($id){
         $this->Media->delete($id); 
         die(); 
     }
@@ -113,7 +113,7 @@ class MediasController extends AppController{
     /**
     * Met l'image à la une
     **/
-    function admin_thumb($id){
+    function thumb($id){
         $this->Media->id = $id; 
         $ref = $this->Media->field('ref');
         $ref_id = $this->Media->field('ref_id');
@@ -123,7 +123,7 @@ class MediasController extends AppController{
         $this->redirect($this->referer());
     }
 
-    function admin_order(){
+    function order(){
         if(!empty($this->request->data['Media'])){
             foreach($this->request->data['Media'] as $k=>$v){
                 $this->Media->id = $k;

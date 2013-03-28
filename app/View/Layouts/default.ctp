@@ -41,13 +41,18 @@
 			<a href="http://<?php echo $_SERVER['SERVER_NAME']; ?>">
 				<img id='logo' src='/img/logo_50x50.png' alt='smartcitizen'>
 				<h1 id="title">Smart Citizen </h1>
-				<h2 id="subtitle">beta</h2>
+				<h2 id="subtitle">beta test</h2>
 			</a>
 		</header>
 		<nav id='nav' role="navigation">
 			<ul>
-				<li><?php echo $this->Html->link('Login', array('controller' => 'users', 'action' => 'me'), array('id'=>'login')); ?></li>
-				<li><?php echo $this->Html->link('Updates', array('controller' => 'search', 'action' => 'updates')); ?></li>
+			<?php if ($authUser['id']){ ?>
+				<li><?php echo $this->Html->link('Dashboard', array('controller' => 'users', 'action' => 'dashboard'), array('id'=>'login')); ?></li>
+			<?php }else{ ?>
+				<li><?php echo $this->Html->link('Login', array('controller' => 'users', 'action' => 'login'), array('id'=>'login')); ?></li>
+			<?php } ?>
+				
+				<li><?php echo $this->Html->link('Updates', array('controller' => 'mixed', 'action' => 'updates')); ?></li>
 				<li><?php echo $this->Html->link('Sensors', array('controller' => 'feeds', 'action' => 'index')); ?></li>
 <!--				<li><?php echo $this->Html->link('Projects', array('controller' => 'users', 'action' => 'index')); ?></li> -->
 				<li><?php echo $this->Html->link('Users', array('controller' => 'users', 'action' => 'index')); ?></li>
@@ -86,7 +91,7 @@
 !-->
 		<footer id='footer'>
 			<div id='loginInfo' class='left'>
-			<?php if ($authUser){ ?>
+			<?php if ($authUser['id']){ ?>
 				loged as <?php echo $this->Html->link($authUser['username'], array('controller' => 'users', 'action' => 'view',$authUser['id'])); ?> | <?php echo $this->Html->link('logout', array('controller' => 'users', 'action' => 'logout')); ?>
 			<?php }else{ ?>
 				<?php echo $this->Html->link('login', array('controller' => 'users', 'action' => 'login')); ?>

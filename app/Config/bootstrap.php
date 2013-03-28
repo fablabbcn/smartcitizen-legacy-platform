@@ -184,6 +184,8 @@ CakeLog::config('error', array(
 /**
  * External plugin
  */
+ CakePlugin::loadAll();
+ /*
  //for avdvanced debug 7
  CakePlugin::load('DebugKit');
  
@@ -200,6 +202,10 @@ CakePlugin::load('ImageResizeHelper');
 //For the form. look Config/email.php -> $contactform for configuration.
 CakePlugin::load('Contactform', array('routes' => true));
 //CakePlugin::load('Contactform');
+
+//For Oauth authentification on third party api.(cosm, facebook, twitter... etc)
+CakePlugin::load('Opauth', array('routes' => true, 'bootstrap' => true));
+*/
 
 /**
  * App specific config 

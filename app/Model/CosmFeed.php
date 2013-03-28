@@ -1,7 +1,7 @@
 <?php
 class CosmFeed extends AppModel {
     public $name = 'CosmFeed';
-	public $useDbConfig = 'cosm';
+	public $useDbConfig = 'cosm_rest';
 	protected $_schema = array(
 		'title' => array(
 			'type' => 'string',
@@ -40,7 +40,7 @@ class CosmFeed extends AppModel {
 			'uri' => array(
 				'host' => 'api.cosm.com',
 //				'path' => 'v2/feeds.json?per_page=10&user=smartcitizen' //&status=live
-				'path' => '/v2/feeds.json?lat=41.38299120166604&lon=2.171001434326172&distance=29.296875&tag=temperature&status=live'
+				'path' => '/v2/feeds.json?tag=smartcitizen&status=live'
 			),
 			'header' => array(
 				'X-ApiKey' => Configure::read('cosm.apikey')
@@ -60,7 +60,7 @@ class CosmFeed extends AppModel {
 		$this->request = array(
 			'uri' => array(
 				'host' => 'api.cosm.com',
-				'path' => 'v2/feeds/'.$id.'.json?duration=15hours&interval=3600'
+				'path' => 'v2/feeds/'.$id.'.json?duration=1days&interval=60&limit=1000'
 			),
 			'header' => array(
 				'X-ApiKey' => Configure::read('cosm.apikey')
@@ -76,7 +76,7 @@ class CosmFeed extends AppModel {
 		$this->request = array(
 			'uri' => array(
 				'host' => 'api.cosm.com',
-				'path' => 'v2/feeds.json?per_page=10&user=smartcitizen&q='.urlencode($keyword) //&status=live
+				'path' => 'v2/feeds.json?per_page=10&tag=smartcitizen&q='.urlencode($keyword) //&status=live
 			),
 			'header' => array(
 				'X-ApiKey' => Configure::read('cosm.apikey')
@@ -108,6 +108,13 @@ class CosmFeed extends AppModel {
 	}
 	
 	public function save($data = null, $validate = true, $fieldList = array()) {
+		if(!isset($data['CosmFeed']['cosm_token']))
+			return false;
+		else
+			$apiKey=$data['CosmFeed']['cosm_token'];
+//		$apiKey = Configure::read('cosm.apikey');
+//		debug($data['CosmFeed']['cosm_token']);
+		
 		if(!is_numeric($data['CosmFeed']['latitude']))
 			$data['CosmFeed']['latitude']=0;
 		if(!is_numeric($data['CosmFeed']['longitude']))
@@ -123,70 +130,101 @@ class CosmFeed extends AppModel {
 			  "title":'.json_encode($data['CosmFeed']['title']).',
 			  "description": '.json_encode($data['CosmFeed']['description']).',
 			  "version":"1.0.0",
-			  "tags":["smartcitizen","test"],
+			  "tags":["smartcitizen","Air quality"],
 			  "location":{
 				"disposition":"fixed",
-				"name":"office",
-				"lat":'.$data['CosmFeed']['latitude'].',
-				"lon":'.$data['CosmFeed']['longitude'].',
+				"name":'.json_encode($data['CosmFeed']['location']).',
+				"lat":'.json_encode($data['CosmFeed']['latitude']).',
+				"lon":'.json_encode($data['CosmFeed']['longitude']).',
+				"elevation":'.json_encode($data['CosmFeed']['elevation']).',
 				"exposure":"outdoor",
 				"domain":"physical"
 			  },
 			  "datastreams":[
 				{
 				  "id":"0",
-				  "tags":["light"],
-				  "unit": {
-					"label": "Relative light",
-					"symbol": "%"
-				  }
-				},
-				{
-				  "id":"1",
-				  "tags":["temperature"],
+				  "tags":["Temperature"],
 				  "unit": {
 					"label": "Celsius",
 					"symbol": "°C"
 				  }
 				},
 				{
-				  "id":"2",
-				  "tags":["humidity"],
+				  "id":"1",
+				  "tags":["Humidity"],
 				  "unit": {
 					"label": "Relative Humidity",
 					"symbol": "%"
 				  }
 				},
 				{
-				  "id":"3",
-				  "tags":["sound"],
+				  "id":"2",
+				  "tags":["CO"],
 				  "unit": {
-					"label": "Decibels",
-					"symbol": "dB"
+					"label": "KiloOhms",
+					"symbol": "KΩ"
+				  }
+				},
+				{
+				  "id":"3",
+				  "tags":["NO2"],
+				  "unit": {
+					"label": "KiloOhms",
+					"symbol": "KΩ"
 				  }
 				},
 				{
 				  "id":"4",
-				  "tags":["co2"],
+				  "tags":["Ambient light"],
 				  "unit": {
-					"label": "Parts per million",
-					"symbol": "ppm"
+					"label": "Relative light",
+					"symbol": "%"
+				  }
+				},
+				{
+				  "id":"5",
+				  "tags":["Noise"],
+				  "unit": {
+					"label": "miliVolts",
+					"symbol": "mV"
+				  }
+				},
+				{
+				  "id":"6",
+				  "tags":["Battery"],
+				  "unit": {
+					"label": "battery charge",
+					"symbol": "%"
+				  }
+				},
+				{
+				  "id":"7",
+				  "tags":["Solar Panel"],
+				  "unit": {
+					"label": "efficience",
+					"symbol": "%"
 				  }
 				}
 			  ]
 			}',
 			'header' => array(
-				'X-ApiKey' => Configure::read('cosm.apikey')
+				'X-ApiKey' => $apiKey
 			),
 		);
 		if (isset($data['CosmFeed']['id'])){ //update !!!
 			$this->request['uri']['path'].='v2/feeds/'.$data['CosmFeed']['id'].'.json';
 		}
 		$return = parent::save($data, $validate, $fieldList);
-		$resultLocation = explode('/',$this->response->headers['Location']);
+		
+		$db = $this->getDataSource();
+		if(!$db->Http->response->headers['Location']){
+			debug($db->Http->response);
+			return false;
+		}
+		$resultLocation = explode('/',$db->Http->response->headers['Location']);
 		$this->id = $resultLocation[5];
 //		debug($this->id);
-		return  $return;
+		return true;
 	}
 	
 	public function generateKey($label = false) {
@@ -207,7 +245,7 @@ class CosmFeed extends AppModel {
 					"access_methods":["get", "put", "post", "delete"] ,
 					"resources": [
 					  {
-						"feed_id": "'.$this->id.'"
+						"feed_id": "Key for Smart Citizen feed '.$this->id.'"
 					  }
 					]
 				  }
@@ -221,12 +259,13 @@ class CosmFeed extends AppModel {
 		);
 		
 		$db = $this->getDataSource();
-		if(!$db->request($this)){
+		$db->request($this);
+		if(!$db->Http->response->headers['Location']){
 			return false;
 		}
+		$resultLocation = explode('/',$db->Http->response->headers['Location']);
 		
-		$resultLocation = explode('/',$this->response->headers['Location']);
-		$this->key = $resultLocation[6];
+		$this->key = $resultLocation[5];
 //		debug($this->key);
 		return true;
 	}

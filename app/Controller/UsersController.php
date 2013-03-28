@@ -3,7 +3,12 @@
 class UsersController extends AppController {
 
 	public $helpers = array('Html', 'Form', 'Session','Text');
-
+	public $components = array(
+		'Apis.Oauth' => array(
+			'cosm'
+		)
+	);
+	
 	public function beforeFilter() {
 		parent::beforeFilter();
 		$this->Auth->allow('add'); // Letting users register themselves
@@ -11,7 +16,7 @@ class UsersController extends AppController {
 	
 	public function isAuthorized($user) {
 		// All registered users can see their profile and logout
-		if (in_array($this->action, array('me', 'logout'))) {
+		if (in_array($this->action, array('dashboard', 'logout', 'cosm_connect', 'cosm_callback', 'cosm_connect', 'email_confirm'))) {
 			return true;
 		}
 
@@ -69,6 +74,15 @@ class UsersController extends AppController {
 //end of hack
         $this->set('data',$data);
 		
+		if ($this->Auth->loggedIn() AND $this->Auth->user('id') === $data['User']['id']) {
+			$this->set('actions',array('dashboard','edit'));
+		}
+//For super Admin 
+/*
+		if ($this->Auth->loggedIn() AND $this->Auth->user('role') === 'admin') {
+			$this->set('actions',array('dashboard','edit','delete'));
+		}
+*/
     }
 
     public function add() {
@@ -78,7 +92,7 @@ class UsersController extends AppController {
 				$this->request->data['User']['role']='citizen';				
             if ($this->User->save($this->request->data)) {
 				if($this->request->data['Media']['file']['error']!=0 || $this->request->data['Media']['file']['size']==0){
-						$this->Session->setFlash(__('User created with success (without image)'));
+						$this->Session->setFlash(__('User created with success, Please login to continue'));
 						$this->Auth->login($this->User->id);
 						$this->redirect(array('action' => 'view',$this->User->id));
 				}else{
@@ -90,8 +104,13 @@ class UsersController extends AppController {
 					))) { 
 						$this->User->saveField('media_id',$this->Media->id);
 						$this->Session->setFlash(__('User created with success'));
-						$this->Auth->login($this->User);
-						$this->redirect(array('action' => 'view',$this->User->id));
+						if(!$this->Auth->login()){
+							$this->Session->setFlash(__('login failed. please enter your username and password to login'));
+							$this->redirect(array('action' => 'login'));
+						}else{
+							$this->redirect(array('action' => 'dashboard'));
+						}
+						
 					}else { 
 						$this->Session->setFlash(__('The user image could not be saved. Please, try again.'));
 					}
@@ -106,7 +125,7 @@ class UsersController extends AppController {
 		$this->helpers[] ='Media.Uploader';
         $this->User->id = $id;
         if (!$this->User->exists()) {
-            throw new NotFoundException(__('Invalid user'));
+            $this->Session->setFlash(__('Invalid user'));
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->User->save($this->request->data)) {
@@ -137,8 +156,85 @@ class UsersController extends AppController {
 //       $this->redirect(array('action' => 'index'));
     }
 	
-	public function me() {
+	public function cosm_connect() {
+		$this->Oauth->useDbConfig = 'cosm';
+        $this->Oauth->connect();
+    }
+	
+	public function cosm_callback() {
+		$this->User->set('id',$this->Auth->user('id'));
+		$this->Oauth->useDbConfig = 'cosm';
+		if ($this->Oauth->callback()){
+            $this->Session->setFlash(__('Successfully connected to Cosm'));
+			$this->User->set('id',$this->Auth->user('id'));
+			$this->User->set('cosm_token',$this->Session->read('OAuth.cosm.access_token'));
+			$this->User->set('cosm_user',$this->Session->read('OAuth.cosm.user'));
+			$this->User->save();
+		}else{
+            $this->Session->setFlash(__('Impossible to connect to Cosm'));
+		}
+		$this->redirect(array('action' => 'dashboard'));
+    }
+	
+	public function dashboard() {
 		$id=$this->Auth->user('id');
-        $this->redirect(array('action' => 'view',$id));
+		$data=$this->User->read(null, $id);
+        $this->set('data',$data);
+		
+		$todo=array();
+		if(!$data['User']['media_id']){
+			$todo[]='photo';
+		}
+		if(!$data['User']['email_verified']){
+			$todo[]='email';
+		}else{
+//			if(empty($data['Post'])){
+				$todo[]='post';
+//			}
+		}
+		if(!$data['User']['cosm_token']){
+			$todo[]='cosm';
+		}else{
+			//if test connection to COSM api with token.
+//			if(empty($data['Feed'])){
+				$todo[]='feed';
+//			}
+		}
+		
+		$this->set('todo',$todo);
 	}
+	
+	public function email_confirm() {
+		$id=$this->Auth->user('id');
+		$data=$this->User->read(null, $id);
+		$code=($id+277)*277*277;
+		
+		App::uses('CakeEmail', 'Network/Email');
+		
+		$email = new CakeEmail('default');
+		$email->viewVars(array('code' => $code));
+		$email->template('welcome') //	View/Emails/text/welcome.ctp
+		->emailFormat('both')
+		->subject('Welcome to the smartcitizen network')
+		->to($data['User']['email'])
+		->send();
+
+//		CakeEmail::deliver($data['User']['email'], 'welcome', $code, array('from' => 'server@smartcitizen.me'));
+
+		$this->Session->setFlash(__('Mail sent. Check your inbox & spam folder'));
+		$this->redirect(array('action' => 'dashboard'));
+	}
+	
+	public function confirm_email($code = null) {
+		$id=$code/277/277-277;
+		$this->User->id = $id;
+        if (!$this->User->exists()) {
+            throw new NotFoundException(__('Invalid code'));
+        }
+		$this->User->set('email_verified', true);
+		$this->User->save();
+		$this->Session->setFlash(__('Mail confirmed.'));
+		$this->redirect(array('action' => 'dashboard'));
+	}
+	
 }

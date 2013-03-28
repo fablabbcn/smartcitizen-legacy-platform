@@ -7,8 +7,8 @@
 
 /* ------- Config --------*/
 //Behaviour
-ajaxEnabled=true;
-$.support.cors = true; // cross-domaon ajax request in IE 8-9.
+ajaxEnabled=false;
+$.support.cors = true; // cross-domaon ajax request in IE 8-9. not working...
 
 //Animation
 var currentDiv = $('#principal')
@@ -35,10 +35,10 @@ $(document).ready( function() {
 
 
 function ajaxify (element){
-	console.log('ajaxify');
+	console.log(element+' ajaxified');
 	// OVERWRITING LINKS default behavior
 	$(element).find("a").click(function(e){
-		if($(this).attr('href').indexOf("posts/edit") == -1 ){ //if not an ection related to post/edit.
+		if($(this).attr('href').indexOf("posts/edit") == -1 && $(this).attr('href').indexOf("cosm_connect") == -1 ){ //if not an ection related to post/edit.
 			e.preventDefault(); 				//if commented, html5 nonsupported browers will reload the page to the specified link.
 			pageurl = $(this).attr('href'); 	//get the link location that was clicked
 			getPage(pageurl);					//ajax call to server + animations
@@ -253,7 +253,7 @@ function makeHideableAside(element){
 
 
 /*----- MAP SETUP -----*/
-
+/*
 var cloudmadeUrl = "http://{s}.tile.cloudmade.com/c1782add755b47c791ad8bbb376cad0b/{styleId}/256/{z}/{x}/{y}.png";
 var cloudmadeAttribution = 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade';
 
@@ -261,11 +261,17 @@ var blue   = L.tileLayer(cloudmadeUrl, {styleId: 71883, attribution: cloudmadeAt
     light  = L.tileLayer(cloudmadeUrl, {styleId: 71869,   attribution: cloudmadeAttribution}),
     minimal  = L.tileLayer(cloudmadeUrl, {styleId: 22677,   attribution: cloudmadeAttribution}),
     red = L.tileLayer(cloudmadeUrl, {styleId: 71881, attribution: cloudmadeAttribution});
-	
+/*	
 var grey = L.tileLayer('http://{s}.tiles.mapbox.com/v3/adrelanex.map-aq9bz8ek/{z}/{x}/{y}.png', {
 	maxZoom: 18,
 	attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy; <a href="http://smartcitizen.me">SmartCitizen</a>'
 });
+*/
+var grey = L.tileLayer('http://{s}.tiles.mapbox.com/v3/examples.map-y7l23tes/{z}/{x}/{y}.png', {
+	maxZoom: 18,
+	attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy; <a href="http://smartcitizen.me">SmartCitizen</a>'
+});
+
 /*	
 var map = L.TileJSON.createMap('map', osmTileJSON);
 	*/	  
@@ -277,7 +283,7 @@ var map = L.map('map', {
     maxzoom: 12,
     layers: [grey]
 });
-
+/*
 
 var baseMaps = {"Graphite": grey, "Dark Blue": blue, "Light-color": light,"Light-Minimal":minimal,"Red": red};
 L.control.layers(baseMaps,null,{position : 'topleft'}).addTo(map);
@@ -307,9 +313,9 @@ var markersLayer = L.layerGroup().addTo(map);
 
 function loadMarkers(){
 
-	tag = "temperature"; //default = temp
-	unit = "celcius";
-	var query="lat="+map.getCenter().lat+"&lon="+map.getCenter().lng+"&distance="+40000/Math.pow(2,map.getZoom())*3+"&tag="+tag+"&status=live";
+	tag = "smartcitizen"; //default = temp
+//	var query="lat="+map.getCenter().lat+"&lon="+map.getCenter().lng+"&distance="+40000/Math.pow(2,map.getZoom())*3+"&tag="+tag+"&status=live";
+	var query="tag="+tag+"&status=live";
 	console.log("Loading new datas");
 
 	//----- Collecting new data
@@ -326,7 +332,7 @@ function loadMarkers(){
 		$('#live_data').text('');
 		//----- filtrating feeds
 		$.each(data.results, function(key, feed) {
-			if(feed.datastreams && feed.location.lat && typeof feed.location.lon != 'undefined'){
+			if(feed.datastreams && feed.location && feed.location.lat && typeof feed.location.lon != 'undefined'){
 				//----- searching the good datastreams
 				var value=0;
 				var text='<table style="border:0;"><tr><td></td><td style="width:10px"></td><td></td></tr>';
